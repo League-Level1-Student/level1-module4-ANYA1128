@@ -31,7 +31,16 @@ public static void main(String[] args) {
 		}
 		
 	});
-	
+	bw.addActionListener(new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			showPictureFromTheInternet("https://image.spreadshirtmedia.com/image-server/v1/compositions/108341060/views/1,width=650,height=650,appearanceId=2,version=1545139415/cute-and-naughty-white-ghost-goes-boo-to-scare-people-an-adorable-and-child-friendly-design-for-kids-to-wear-on-halloween.jpg");
+		}
+		
+	});
+	jeff.pack();
 }
 private static void showPictureFromTheInternet(String imageUrl) {
     try {
