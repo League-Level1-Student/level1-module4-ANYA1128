@@ -34,7 +34,7 @@ import javax.swing.JPanel;
 public class Jeopardy implements ActionListener {
 	private JButton firstButton;
 	private JButton secondButton;
-	private JButton thirdButton, fourthButton;
+	private JButton thirdButton, fourthButton; 
 	private JPanel quizPanel;
 	private int score = 0;
 	private JLabel scoreBox = new JLabel("0");
@@ -61,7 +61,7 @@ quizPanel.add(panel);
 		// 5. Add the quizPanel to the frame
 frame.add(quizPanel);
 		// 6. Use the createButton method to set the value of firstButton
-firstButton = createButton("3");
+firstButton = createButton("$200");
 		// 7. Add the firstButton to the quizPanel
 quizPanel.add(firstButton);
 		// 8. Write the code to complete the createButton() method below. Check that your
@@ -69,11 +69,19 @@ quizPanel.add(firstButton);
 
 		// 9. Use the secondButton variable to hold a button using the createButton
 		// method
-
+secondButton = createButton("$400");
 		// 10. Add the secondButton to the quizPanel
+quizPanel.add(secondButton);
+thirdButton=createButton("$600");
+quizPanel.add(thirdButton);
+fourthButton = createButton("$800");
+quizPanel.add(fourthButton);
 
 		// 11. Add action listeners to the buttons (2 lines of code)
-
+secondButton.addActionListener(this);
+firstButton.addActionListener(this);
+thirdButton.addActionListener(this);
+fourthButton.addActionListener(this);
 		// 12. Write the code to complete the actionPerformed() method below
 
 		// 13. Add buttons so that you have $200, $400, $600, $800 and $1000 questions
@@ -82,6 +90,7 @@ quizPanel.add(firstButton);
 		 * [optional] Use the showImage or playSound methods when the user answers a
 		 * question
 		 */		
+
 		
 		frame.pack();
 		quizPanel.setLayout(new GridLayout(buttonCount + 1, 3));
@@ -94,31 +103,50 @@ quizPanel.add(firstButton);
 	private JButton createButton(String dollarAmount) {
 		
 		// Create a new JButton
-
+JButton aos = new JButton();
 		// Set the text of the button to the dollarAmount
-
+aos.setText(dollarAmount);
 		// Increment the buttonCount (this should make the layout vertical)
+buttonCount++;
 
 		// Return your new button instead of the temporary button
 
-		return new JButton("temporary button");
+		return new JButton(dollarAmount);
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		
 		// Remove this temporary message after testing:
-		JOptionPane.showMessageDialog(null, "pressed " + ((JButton) e.getSource()).getText() + " button");
+
 
 		JButton buttonPressed = (JButton) e.getSource();
 		// If the buttonPressed was the firstButton
+if(buttonPressed==firstButton) {
+	// Call the askQuestion() method
+	askQuestion("What is the birthdate of BTS member V?", "December 30, 1995", 200);
+    firstButton.setText(null);
+}
+			
 
-			// Call the askQuestion() method
  
 		// Complete the code in the askQuestion() method. When you play the game, the score should change.
 
 		// If the buttonPressed was the secondButton
-
-			// Call the askQuestion() method with a harder question
+if(buttonPressed==secondButton) {
+	// Call the askQuestion() method with a harder question
+	askQuestion("What was the date the first episode of Agents of S.H.I.E.L.D. was released?", "September 24, 2013", 400);
+	secondButton.setText(null);
+}
+if(buttonPressed==thirdButton) {
+	// Call the askQuestion() method with a harder question
+	askQuestion("How old is BTS member Jimin?", "23", 600);
+	thirdButton.setText(null);
+}	
+if(buttonPressed==fourthButton) {
+	// Call the askQuestion() method with a harder question
+	askQuestion("When did Avengers:Endgame release?", "April 26, 2019", 800);
+	fourthButton.setText(null);
+}
 
 		// Clear the text on the button that was pressed (set the button text to nothing)
 
@@ -127,25 +155,41 @@ quizPanel.add(firstButton);
 	private void askQuestion(String question, String correctAnswer, int prizeMoney) {
 		
 		// Use the playJeopardyTheme() method to play music while the use thinks of an answer
-		
+		playJeopardyTheme();
 		// Remove this temporary message and replace it with a pop-up that asks the user the question
-		JOptionPane.showMessageDialog(null, "this is where the question will be asked");
+		String answer = JOptionPane.showInputDialog(null, question);
 		
 		// Stop the theme music when they have entered their response. Hint: use the sound variable 
-		
+	
+		sound.stop();
 		// If the answer is correct
+if(answer.equals(correctAnswer)) {
+	// Increase the score by the prizeMoney
+	score+=prizeMoney;
+	// Pop up a message to tell the user they were correct
+	JOptionPane.showMessageDialog(null, "I am proud of you. You are correct. You must be proud too.");
+showCorrectImage();
+updateScore();
+}
+			
 
-			// Increase the score by the prizeMoney
-
-			// Pop up a message to tell the user they were correct
+			
 
 		// Otherwise
+else {
+	// Decrement the score by the prizeMoney
+	score-=prizeMoney;
+	// Pop up a message to tell the user they were wrong and give them the correct answer
+	JOptionPane.showMessageDialog(null, "Sad. I mean I guess it is ok since people make mistakes. It is ok to cry...Jeopardy is a big deal. No judging here. Correct answer: " + correctAnswer);
+	// Call the updateScore() method
+	updateScore();
+	showIncorrectImage();
+}
+			
 
-			// Decrement the score by the prizeMoney
+			
 
-			// Pop up a message to tell the user they were wrong and give them the correct answer
-
-		// Call the updateScore() method
+		
 
 	}
 
