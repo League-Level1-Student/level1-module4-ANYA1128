@@ -182,8 +182,9 @@ else {
 	// Pop up a message to tell the user they were wrong and give them the correct answer
 	JOptionPane.showMessageDialog(null, "Sad. I mean I guess it is ok since people make mistakes. It is ok to cry...Jeopardy is a big deal. No judging here. Correct answer: " + correctAnswer);
 	// Call the updateScore() method
-	updateScore();
 	showIncorrectImage();
+	updateScore();
+
 }
 			
 
