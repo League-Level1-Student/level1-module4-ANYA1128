@@ -13,6 +13,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
  
 /** We’re going to make a slideshow of cool optical illusions. When the user clicks on an illusion, a new one will be loaded. **/
 
@@ -20,6 +21,9 @@ public class BookOfIllusions extends MouseAdapter {
 
 	// 1. Make a JFrame variable and initialize it using "new JFrame()"
 JFrame wow = new JFrame();
+JLabel illusion1 = loadImageFromComputer("thatone.jpg");
+JLabel illusion2 = loadImageFromComputer("ladyillusion.jpg");
+
 
 	public void run() {
 		// 2. make the frame visible
@@ -28,13 +32,11 @@ JFrame wow = new JFrame();
 		wow.setSize(1000, 1000);
 		// 4. find 2 images and save them to your project’s default package
 		// 5. make a variable to hold the location of your image. e.g. "illusion.jpg"
-		String illusion1 = "thatone.jpg";
-		String illusion2 = "ladyillusion.jpg";
+	
 		// 6. create a variable of type "JLabel" but don’t initialize it yet
-		JLabel that = new JLabel(illusion1);
-		JLabel heh = new JLabel(illusion2);
-		wow.add(that);
-		wow.add(heh);
+		
+		wow.add(illusion1);
+		
 		// 7. use the "loadImage..." methods below to initialize your JLabel
 		// 8. add your JLabel to the frame
 		// 9. call the pack() method on the frame
@@ -45,13 +47,21 @@ JFrame wow = new JFrame();
 
 	public void mousePressed(MouseEvent e) {
 		// 11. Print "clicked!" to the console when the mouse is pressed
-		if() {
-			
-		}
+		System.out.println("clicked!");
+		JOptionPane.showMessageDialog(null, "Is it spinning????? Or are you halluuucciiinnnaaatttiinngg???");
 		// 12. remove everything from the frame that was added earlier
-		// 13. load a new image like before (this is more than one line of code)
-		// 14. pack the frame
-	}
+		wow.remove(illusion1);
+		
+		
+			// 13. load a new image like before (this is more than one line of code)
+		wow.add(illusion2);
+	
+			// 14. pack the frame
+		wow.pack();
+		JOptionPane.showMessageDialog(null, "What do you see? An old or pretty woman?");
+		}
+		
+	
 
 	// [OPTIONAL] 15. goad your users with some annoying or witty pop-ups
 
