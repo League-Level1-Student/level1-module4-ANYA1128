@@ -1,8 +1,10 @@
+import java.applet.AudioClip;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.util.Random;
 
+import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -49,17 +51,24 @@ public class WhackAMole implements ActionListener {
 		mole.drawButtons(new Random().nextInt(24));
 		timeAtStart = new Date();
 	}
+	private void playSound(String fileName) {
+	     AudioClip sound = JApplet.newAudioClip(getClass().getResource(fileName));
+	     sound.play();
+	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if (((JButton) e.getSource()).getText().equals("mole!")) {
 			numOfMolesWhacked++;
+			playSound("boink.wav");
 			System.out.println(numOfMolesWhacked);
 			WhackAMole mole = new WhackAMole();
 			mole.drawButtons(new Random().nextInt(24));
 			if (numOfMolesWhacked == 10) {
 				endGame(timeAtStart, numOfMolesWhacked);
+				frame.dispose();
 			}
 		} else {
 			numNotWhacked++;
